@@ -27,7 +27,7 @@
         <el-table-column
           prop="turn"
           label="轮次"
-          width:="250">
+          width:="150">
         </el-table-column>
         <el-table-column
           prop="company"
