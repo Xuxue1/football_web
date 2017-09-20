@@ -1,11 +1,11 @@
 <template>
   <el-form ref="form" :model="form" label-width="80px" label-position="left">
     <div class="block">
-      <span class="demonstration">日期</span>
+      <span class="">日期</span>
       <el-date-picker
         v-model="value7"
         type="datetimerange"
-        align="right"
+        align="center"
         placeholder="日期"
         format='yyyy-MM-dd HH:mm:ss'
         :picker-options="pickerOptions"
@@ -72,7 +72,6 @@
         <el-input v-model="form.name"></el-input>
       </el-form-item>
     </div>
-
   </el-form>
 </template>
 <script>
@@ -130,6 +129,7 @@
       }
     }
   }
+
 </script>
 
 <style>

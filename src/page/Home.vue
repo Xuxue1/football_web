@@ -1,3 +1,4 @@
+/*@flow*/
 <template>
     <div class="search-box">
       <el-input v-model="input" size="large" placeholder="请输入内容" icon="search" class="search-input">
@@ -18,6 +19,8 @@
 
 <script>
   import Setting from '../components/Setting.vue'
+
+
   export default {
     components: {
       Setting
@@ -41,6 +44,10 @@
     },
     methods:{
       click(){
+        let a:string = '111'
+        console.log(a)
+        let b:Test = {'a':'11','b':1}
+        console.log(JSON.stringify(b))
         this.$router.push('/search')
       }
     }
