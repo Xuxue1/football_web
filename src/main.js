@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import '../static/style.css'
 
 Vue.use(ElementUI)
 
@@ -12,9 +13,9 @@ Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App },
-  render: h => h(App)
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: { App },
+    render: h => h(App)
 })

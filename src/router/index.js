@@ -7,21 +7,20 @@ import Search from '@/page/Search'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/search',
-      name: 'Search',
-      component: Search
-    }
-  ]
+    routes: [{
+            path: '/',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/search',
+            name: 'Search',
+            component: Search
+        }
+    ]
 })
