@@ -19,7 +19,7 @@
 
 <script>
   import Setting from '../components/Setting.vue'
-
+  import axios from 'axios'
 
   export default {
     components: {
@@ -47,7 +47,8 @@
         let a:string = '111'
         console.log(a)
         let b:Test = {'a':'11','b':1}
-        console.log(JSON.stringify(b))
+        console.log("Hello")
+        axios.post('/test/test',{'data':'hello'},{ headers: { 'Content-Type': 'application/json' } });
         this.$router.push('/search')
       }
     }

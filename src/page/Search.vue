@@ -3,6 +3,15 @@
     <div class="search-box">
     <el-input v-model="input" size="large" placeholder="请输入内容" icon="search" class="search-input"></el-input>
     <el-button type="text" @click="dialogFormVisible = true" class="setting-button">设置</el-button>
+      <div class="dialog">
+        <el-dialog title="" :visible.sync="dialogFormVisible">
+          <Setting></Setting>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          </div>
+        </el-dialog>
+      </div>
     </div>
     <div class="result-table">
       <el-table
@@ -67,7 +76,6 @@
       </el-table>
     </div>
     <div class="block">
-      <span class="demonstration">完整功能</span>
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -83,9 +91,15 @@
 </template>
 
 <script>
+  import Setting from '../components/Setting.vue'
+
   export default {
+    components: {
+      Setting
+    },
     data() {
       return {
+        dialogFormVisible: false,
         tableData: [{
           date: '2017-09-12 01:00',
           leagle: '瑞典甲',

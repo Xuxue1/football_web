@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="form" :model="form" label-width="80px" label-position="left">
+  <el-form ref="form" :model="form" label-width="80px" label-position="left" class ="my-form">
     <div class="block">
       <span class="">日期</span>
       <el-date-picker
@@ -19,7 +19,7 @@
       </el-form-item>
     </div>
 
-    <div class="leagle">
+    <div>
       <el-form-item label="主队">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
@@ -134,9 +134,15 @@
 
 <style>
   .block{
-    float: left;
+
   }
   .leagle{
-    float: left;
+
+  }
+
+  .my-form{
+    width: 70%;
+    position: relative;
+    margin: 0 auto;
   }
 </style>
