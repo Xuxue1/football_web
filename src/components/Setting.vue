@@ -1,16 +1,16 @@
 <template>
   <el-form ref="form" :model="form" label-width="80px" label-position="left" class ="my-form">
     <div class="block">
-      <span class="">日期</span>
-      <el-date-picker
-        v-model="value7"
-        type="datetimerange"
-        align="center"
-        placeholder="日期"
-        format='yyyy-MM-dd HH:mm:ss'
-        :picker-options="pickerOptions"
-        class="date-picker">
-      </el-date-picker>
+        <el-form-item label="日期">
+            <el-date-picker
+                v-model="value7"
+                type="datetimerange"
+                placeholder="日期"
+                format='yyyy-MM-dd HH:mm:ss'
+                :picker-options="pickerOptions"
+                class="date-picker">
+            </el-date-picker>
+        </el-form-item>
     </div>
 
     <div class="leagle">
@@ -133,13 +133,9 @@
 </script>
 
 <style>
-  .block{
-
-  }
-  .leagle{
-
-  }
-
+    .el-date-editor--datetimerange.el-input{
+        width: 100%
+    }
   .my-form{
     width: 70%;
     position: relative;
