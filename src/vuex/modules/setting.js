@@ -35,6 +35,9 @@ const getters = {
   inited: state=>state.inited
 };
 
+const mutations = {
+
+}
 
 
 

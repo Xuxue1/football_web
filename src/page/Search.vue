@@ -130,7 +130,7 @@
     },
     computed: {
        startTime(){
-          store.settings.stat
+
        }
     }
   }

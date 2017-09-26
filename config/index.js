@@ -28,10 +28,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/football/': {
-        target: 'http://47.92.95.202:9101/api/football/search/query',
+      '/football/': {
+        target: 'http://47.92.91.6:9101/api/football',
         pathRewrite: {
-          '^/api/football': ''
+          '^/football': ''
         }
       },
     },
