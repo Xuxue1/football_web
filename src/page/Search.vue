@@ -26,7 +26,7 @@
           prop="startTime"
           label="开赛日期"
           sortable
-          width="150">
+          width="170">
         </el-table-column>
         <el-table-column
           prop="league"
@@ -36,7 +36,7 @@
         <el-table-column
           prop="turn"
           label="轮次"
-          width:="150">
+          width:="100">
         </el-table-column>
         <el-table-column
           prop="company"
@@ -122,6 +122,7 @@
       })).then(response=>{
         console.log(response.data);
         this.tableData = response.data.rows.map(d=>{
+            d.startTime = d.startTime.slice(0,16);
           console.log(d);
           if(d.scoreM && d.scoreO){
             d.score = d.scoreM+"-"+d.scoreO
