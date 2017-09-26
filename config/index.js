@@ -23,15 +23,15 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8081,
+    port: 8083,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/test/': {
-        target: 'http://localhost:8089/test',
+      '/api/football/': {
+        target: 'http://47.92.95.202:9101/api/football/search/query',
         pathRewrite: {
-          '^/test': ''
+          '^/api/football': ''
         }
       },
     },

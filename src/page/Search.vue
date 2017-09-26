@@ -23,7 +23,7 @@
           width="80">
         </el-table-column>
         <el-table-column
-          prop="date"
+          prop="startTime"
           label="开赛日期"
           sortable
           width="150">
@@ -92,97 +92,26 @@
 
 <script>
   import Setting from '../components/Setting.vue'
+  import axios from 'axios'
+  import store from './../vuex/store'
 
   export default {
     components: {
       Setting
     },
+    created(){
+      axios.post('/api/football/search/query')
+    },
     data() {
       return {
         dialogFormVisible: false,
-        tableData: [{
-          date: '2017-09-12 01:00',
-          leagle: '瑞典甲',
-          turn:'R_23',
-          company:'利记sbobet',
-          mTeam:'特雷勒堡',
-          score:'2-1',
-          oTeam:'哥德堡盖斯',
-          mOdds:'1.13',
-          pOdds:'17',
-          oOdds:'1.7',
-          tag: '公司'
-        },
-          {
-            date: '2017-09-12 01:00',
-            leagle: '瑞典甲',
-            turn: 'R_23',
-            company: '利记sbobet',
-            mTeam:'特雷勒堡',
-            score:'2-1',
-            oTeam:'哥德堡盖斯',
-            mOdds:'1.13',
-            pOdds:'17',
-            oOdds:'1.7',
-            tag: '公司'
-          },
-          {
-            date: '2017-09-12 01:00',
-            leagle: '瑞典甲',
-            turn: 'R_23',
-            company: '利记sbobet',
-            mTeam:'特雷勒堡',
-            score:'2-1',
-            oTeam:'哥德堡盖斯',
-            mOdds:'1.13',
-            pOdds:'17',
-            oOdds:'1.7',
-            tag: '公司'
-          },
-          {
-            date: '2017-09-12 01:00',
-            leagle: '瑞典甲',
-            turn: 'R_23',
-            company: '利记sbobet',
-            mTeam:'特雷勒堡',
-            score:'2-1',
-            oTeam:'哥德堡盖斯',
-            mOdds:'1.13',
-            pOdds:'17',
-            oOdds:'1.7',
-            tag: '公司'
-          },
-          {
-            date: '2017-09-12 01:00',
-            leagle: '瑞典甲',
-            turn: 'R_23',
-            company: '利记sbobet',
-            mTeam:'特雷勒堡',
-            score:'2-1',
-            oTeam:'哥德堡盖斯',
-            mOdds:'1.13',
-            pOdds:'17',
-            oOdds:'1.7',
-            tag: '公司'
-          },
-          {
-            date: '2017-09-12 01:00',
-            leagle: '瑞典甲',
-            turn: 'R_23',
-            company: '利记sbobet',
-            mTeam:'特雷勒堡',
-            score:'2-1',
-            oTeam:'哥德堡盖斯',
-            mOdds:'1.13',
-            pOdds:'17',
-            oOdds:'1.7',
-            tag: '公司'
-          }],
+        tableData: [],
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4,
-        input: ''
+        input: '',
+        setting:{}
       }
     },
     methods: {
@@ -198,6 +127,11 @@
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       }
+    },
+    computed: {
+       startTime(){
+          store.settings.stat
+       }
     }
   }
 </script>
