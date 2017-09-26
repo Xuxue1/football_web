@@ -29,7 +29,7 @@
           width="150">
         </el-table-column>
         <el-table-column
-          prop="leagle"
+          prop="league"
           label="联赛"
           width="150">
         </el-table-column>
@@ -59,17 +59,17 @@
           width="150">
         </el-table-column>
         <el-table-column
-          prop="mOdds"
+          prop="modds"
           label="主"
           width="70">
         </el-table-column>
         <el-table-column
-          prop="pOdds"
+          prop="podds"
           label="平"
           width="70">
         </el-table-column>
         <el-table-column
-          prop="oOdds"
+          prop="oodds"
           label="客"
           width="70">
         </el-table-column>
@@ -94,13 +94,43 @@
   import Setting from '../components/Setting.vue'
   import axios from 'axios'
   import store from './../vuex/store'
+  import qs from 'qs'
+  axios.defaults.headers = {
+    'Content-Type': 'application/x-www-form-urlencoded;application/json;charset=UTF-8',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Accept': 'application/json'
+  };
+  axios.defaults.timeout = 10000;
 
   export default {
     components: {
       Setting
     },
     created(){
-      axios.post('/api/football/search/query')
+      let settings = {
+        "startTime":"2017-08-01 00:00:00",
+        "endTime":"2017-10-01 00:00:00"
+      };
+      let input  = "公司=威廉";
+      let pageSize = 50;
+      let pageNum = 1;
+      axios.post('/football/search/query',qs.stringify({
+        "settings":JSON.stringify(settings),
+        "input":input,
+        "pageSize":pageSize,
+        "pageNum":pageNum
+      })).then(response=>{
+        console.log(response.data);
+        this.tableData = response.data.rows.map(d=>{
+          console.log(d);
+          if(d.scoreM && d.scoreO){
+            d.score = d.scoreM+"-"+d.scoreO
+          }else{
+            d.score = '-'
+          }
+          return d;
+        })
+      });
     },
     data() {
       return {
