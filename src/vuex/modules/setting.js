@@ -3,6 +3,8 @@
  * @type {{}}
  */
 
+import * as types from './../types'
+
 const state = {
   startTime:'',
   endTime:'',
@@ -36,15 +38,32 @@ const getters = {
 };
 
 const mutations = {
+  [types.MODIFY_SETTING](state,settings){
+    console.log("recive "+JSON.stringify(settings));
+    state.inited = true;
+    state.endTime = settings.endTime;
+    state.startTime = settings.startTime;
+    state.leagle = settings.leagle;
+    state.mteam = settings.mteam;
+    state.oteam = settings.oteam;
+    state.mscore = settings.mscore;
+    state.oscore = settings.oscore;
+    state.turn = settings.turn;
+    state.company = settings.company;
+    state.modds = settings.modds;
+    state.podds = settings.podds
+  }
+};
 
-}
-
+const actions={};
 
 
 export default {
-  state
+  state,
+  getters,
+  actions,
+  mutations
 }
-
 
 
 

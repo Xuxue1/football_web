@@ -19,6 +19,8 @@
 
 <script>
   import Setting from '../components/Setting.vue'
+  import { mapGetters } from 'vuex'
+
   export default {
     components: {
       Setting
@@ -39,6 +41,22 @@
         },
         formLabelWidth: '120px'
       }
+    },
+    computed: {
+      ...mapGetters({
+        startTime: 'startTime',
+        endTime: 'endTime',
+        leagle:'leagle',
+        mteam:'mteam',
+        oteam:'oteam',
+        mscore:'mscore',
+        oscore:'oscore',
+        turn:'turn',
+        company:'company',
+        modds:'modds',
+        podds:'podds',
+        oodds:'oodds',
+      })
     },
     methods:{
       click(){

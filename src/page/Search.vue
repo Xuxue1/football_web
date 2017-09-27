@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="search-box">
-    <el-input v-model="input" size="large" placeholder="请输入内容" icon="search" class="search-input"></el-input>
+    <el-input v-model="input" size="large" placeholder="请输入内容" icon="search" class="search-input">
+      <el-button slot="append" icon="search" @click="click"></el-button>
+    </el-input>
     <el-button type="text" @click="dialogFormVisible = true" class="setting-button">设置</el-button>
       <div class="dialog">
         <el-dialog title="" :visible.sync="dialogFormVisible">
@@ -95,6 +97,7 @@
   import axios from 'axios'
   import store from './../vuex/store'
   import qs from 'qs'
+  import { mapGetters } from 'vuex'
   axios.defaults.headers = {
     'Content-Type': 'application/x-www-form-urlencoded;application/json;charset=UTF-8',
     'X-Requested-With': 'XMLHttpRequest',
@@ -156,13 +159,42 @@
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      createRequestSettings(){
+        let settings={};
+        settings.startTime = this.startTime;
+        settings.endTime = this.endTime;
+        settings.leagle = this.leagle;
+        settings.mteam = this.mteam;
+        settings.oteam = this.oteam;
+        settings.mscore = this.mscore;
+        settings.turn = this.turn;
+        settings.company = this.company;
+        settings.modds = this.modds;
+        settings.podds = this.podds;
+        settings.oodds = this.oodds;
+        return JSON.stringify(settings)
+      },
+      click(){
+        console.log(this.createRequestSettings())
       }
     },
     computed: {
-       startTime(){
-
-       }
-    }
+      ...mapGetters({
+        startTime: 'startTime',
+        endTime: 'endTime',
+        leagle:'leagle',
+        mteam:'mteam',
+        oteam:'oteam',
+        mscore:'mscore',
+        oscore:'oscore',
+        turn:'turn',
+        company:'company',
+        modds:'modds',
+        podds:'podds',
+        oodds:'oodds',
+      })
+    },
   }
 </script>
 
