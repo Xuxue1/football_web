@@ -3,7 +3,7 @@
     <div class="block">
         <el-form-item label="日期">
             <el-date-picker
-                v-model="value7"
+                v-model="date"
                 type="datetimerange"
                 placeholder="日期"
                 format='yyyy-MM-dd HH:mm:ss'
@@ -83,7 +83,7 @@
   export default {
     data() {
       return {
-        value7: '',
+        date: '',
         pickerOptions: {
           shortcuts: [{
             text: '最近一周',
@@ -139,10 +139,19 @@
         this.modds_ = this.modds;
         this.podds_ = this.podds;
         this.oodds_ = this.oodds;
+        var now = new Date();
+        var start = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+        this.date = [start,now]
+
     },
 
     methods: {
       submit(){
+        console.log("date ----"+this.date);
+        if((this.date instanceof Array) && this.date.length === 2){
+          this.startTime_ = this.formate(this.date[0]);
+          this.endTime_ = this.formate(this.date[1]);
+        }
         this.$store.commit('MODIFY_SETTING',this.createRequestSettings())
       },
       createRequestSettings(){
@@ -161,6 +170,24 @@
         settings.oodds = this.oodds_;
         settings.h = this.h;
         return settings
+      },
+      formate(date){
+        let fmt = 'yyyy-MM-dd hh:mm:ss';
+        let o = {
+          "M+" : date.getMonth()+1,                 //月份
+          "d+" : date.getDate(),                    //日
+          "h+" : date.getHours(),                   //小时
+          "m+" : date.getMinutes(),                 //分
+          "s+" : date.getSeconds(),                 //秒
+          "q+" : Math.floor((date.getMonth()+3)/3), //季度
+          "S"  : date.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt))
+          fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(let k in o)
+          if(new RegExp("("+ k +")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
       }
     },
     computed: {

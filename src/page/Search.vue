@@ -22,18 +22,24 @@
         <el-table-column
           type="index"
           label="序号"
-          width="80">
+          width="60">
         </el-table-column>
         <el-table-column
           prop="startTime"
           label="开赛日期"
           sortable
-          width="170">
+          width="160">
+        </el-table-column>
+        <el-table-column
+          prop="status"
+          label="比赛状态"
+          sortable
+          width="90">
         </el-table-column>
         <el-table-column
           prop="league"
           label="联赛"
-          width="150">
+          width="100">
         </el-table-column>
         <el-table-column
           prop="turn"
@@ -81,11 +87,11 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
+        :current-page="currentPage"
+        :page-sizes="[20, 40, 100, 200]"
+        :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400">
+        :total="total">
       </el-pagination>
     </div>
   </div>
@@ -110,42 +116,17 @@
       Setting
     },
     created(){
-      let settings = {
-        "startTime":"2017-08-01 00:00:00",
-        "endTime":"2017-10-01 00:00:00"
-      };
-      let input  = "公司=威廉";
-      let pageSize = 50;
-      let pageNum = 1;
-      axios.post('/football/search/query',qs.stringify({
-        "settings":JSON.stringify(settings),
-        "input":input,
-        "pageSize":pageSize,
-        "pageNum":pageNum
-      })).then(response=>{
-        console.log(response.data);
-        this.tableData = response.data.rows.map(d=>{
-            d.startTime = d.startTime.slice(0,16);
-          console.log(d);
-          if(d.scoreM && d.scoreO){
-            d.score = d.scoreM+"-"+d.scoreO
-          }else{
-            d.score = '-'
-          }
-          return d;
-        })
-      });
+      this.search(10,1);
     },
     data() {
       return {
         dialogFormVisible: false,
         tableData: [],
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4,
+        currentPage: 1,
         input: '',
-        setting:{}
+        setting:{},
+        total:0,
+        pageSize:20,
       }
     },
     methods: {
@@ -156,10 +137,11 @@
         return row.tag === value;
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        this.pageSize = val
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+         this.currentPage = val
+         this.search(this.pageSize,val)
       },
       createRequestSettings(){
         let settings={};
@@ -177,7 +159,30 @@
         return JSON.stringify(settings)
       },
       click(){
-        console.log(this.createRequestSettings())
+        console.log(this.createRequestSettings());
+        console.log(this.input);
+        this.search(this.pageSize,this.currentPage)
+      },
+      search(pageSize,pageNum){
+          let searchParm = {}
+          searchParm.settings = this.createRequestSettings();
+          searchParm.input = this.input;
+          searchParm.pageSize = pageSize;
+          searchParm.pageNum = pageNum;
+          axios.post('/football/search/query',qs.stringify(searchParm)).then(response=>{
+            console.log(response.data);
+            this.total = response.data.total;
+            this.tableData = response.data.rows.map(d=>{
+              d.startTime = d.startTime.slice(0,16);
+              console.log(d);
+              if(d.scoreM && d.soreO){
+                d.score = d.scoreM+"-"+d.soreO
+              }else{
+                d.score = '-'
+              }
+              return d;
+            })
+        })
       }
     },
     computed: {
