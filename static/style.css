@@ -89,7 +89,7 @@ body {
     font-family: 'microsoft yaihei';
     text-align: center;
     color: #2c3e50;
-    height: 100%;
+    padding: 20px;
 }
 
 .login_wrapper {
@@ -256,4 +256,28 @@ body {
 
 .displayNone {
     display: none;
+}
+
+.search-box {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 0px;
+    position: relative;
+}
+
+.search-input {
+    width: 80%!important;
+    position: relative;
+}
+
+setting-button {
+    float: left;
+    left: auto;
+}
+
+.result-table {
+    width: 90%;
+    margin: 0 auto;
+    margin: 30px 0;
+    position: relative;
 }

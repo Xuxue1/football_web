@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="search-box">
-    <el-input v-model="input" size="large" placeholder="请输入内容" icon="search" class="search-input">
-      <el-button slot="append" icon="search" @click="click"></el-button>
-    </el-input>
-    <el-button type="text" @click="dialogFormVisible = true" class="setting-button">设置</el-button>
-      <div class="dialog">
-        <el-dialog title="" :visible.sync="dialogFormVisible">
-          <Setting></Setting>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-          </div>
-        </el-dialog>
-      </div>
+        <el-input class="search-input" v-model="input" size="large" placeholder="请输入内容" icon="search">
+            <el-button slot="append" icon="search" @click="click"></el-button>
+        </el-input>
+        <el-button type="text" @click="dialogFormVisible = true" class="setting-button">设置</el-button>
+        <div class="dialog">
+            <el-dialog title="" :visible.sync="dialogFormVisible">
+                <Setting></Setting>
+                <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                </div>
+            </el-dialog>
+        </div>
     </div>
     <div class="result-table">
       <el-table
@@ -203,28 +203,3 @@
     },
   }
 </script>
-
-<style>
-  .search-box{
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 0px;
-    position: relative;
-  }
-
-  .search-input{
-    width: 80%;
-    position: relative;
-  }
-
-  setting-button{
-    float: left;
-    left: auto;
-  }
-  .result-table{
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 50px;
-    position: relative;
-  }
-</style>
